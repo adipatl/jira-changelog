@@ -25,7 +25,7 @@ module.exports = {
     ticketIDPattern: /([A-Z]+\-[0-9]+)/i,
 
     // Status names that mean the ticket is approved.
-    approvalStatus: ['Open', 'Reopened', 'In Progress', 'Resolved', 'Verified', 'Closed']
+    approvalStatus: ['Open', 'Reopened', 'In Progress', 'Resolved', 'Verified', 'Closed'],
 
     // Tickets to exclude from the changelog, by type name
     excludeIssueTypes: ['Sub-task'],
