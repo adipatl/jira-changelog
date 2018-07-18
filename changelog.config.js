@@ -10,6 +10,7 @@ module.exports = {
       host: undefined,
       username: undefined,
       password: undefined,
+      protocol: 'https'
     },
 
     // Jira base web URL
