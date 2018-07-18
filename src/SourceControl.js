@@ -64,8 +64,7 @@ export default class SourceControl {
           authorName: '%aN',
           authorEmail: '%ae'
         },
-        '--no-merges': this.config.log.no_merges,
-        '--merges': this.config.log.merges,
+        '--merges': true,
         ...range
       };
 
