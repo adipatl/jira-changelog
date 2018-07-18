@@ -39,6 +39,7 @@ export default class SourceControl {
 
   constructor(config) {
     this.slack = new Slack(config);
+    this.config = config;
   }
 
   /**
@@ -63,9 +64,10 @@ export default class SourceControl {
           authorName: '%aN',
           authorEmail: '%ae'
         },
-        '--no-merges': true,
+        '--no-merges': this.config.log.no_merges,
+        '--merges': this.config.log.merges,
         ...range
-      }
+      };
 
       workspace.log(opts, (err, response) => {
         if (err) {

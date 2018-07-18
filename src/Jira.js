@@ -22,7 +22,7 @@ export default class Jira {
 
     if (config.jira.api.host) {
       this.jira = new JiraApi({
-        protocol: 'https',
+        protocol: config.jira.api.protocol,
         host: config.jira.api.host,
         username: config.jira.api.username,
         password: config.jira.api.password,
