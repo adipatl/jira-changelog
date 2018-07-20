@@ -76,6 +76,10 @@ module.exports = {
     }
   },
 
+  report: {
+    header: "Release Note"
+  },
+
   // Transforms the basic changelog data before it goes to the template.
   //  data - The changlelog data.
   transformData: function(data) {

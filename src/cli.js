@@ -103,6 +103,13 @@ async function runProgram() {
       projectName: config.jira.project
     };
 
+    data.report = {
+      header: config.report.header,
+      from: config.sourceControl.from,
+      to: config.sourceControl.to,
+    };
+
+
     // Render and output template
     const entitles = new Entities.AllHtmlEntities();
     const changelogMessage = ejs.render(config.template, data);
