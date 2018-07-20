@@ -48,6 +48,10 @@ function commandLineArgs() {
       '--release [release]',
       'Assign a release version to these stories'
     )
+    .option(
+      '--header [header]',
+      'Customize the header of the release note'
+    )
     .parse(process.argv);
 }
 
@@ -104,7 +108,7 @@ async function runProgram() {
     };
 
     data.report = {
-      header: config.report.header,
+      header: getHeaderString(config),
       from: range.from,
       to: range.to,
       before: range.before,
@@ -275,4 +279,21 @@ function getRangeObject(config) {
       throw new Error('No range defined for the changelog.');
   }
   return range;
+}
+
+/**
+ * Return the header string from the CLI arguments and config
+ *
+ * @param {Object} config - The config object provided by Config.getConfigForPath
+ * @return {String}
+ */
+function getHeaderString(config) {
+    var defaultHeader = (config.report && config.report.header) ? config.report.header : "";
+
+    if (program.header && program.header.length) {
+        return program.header;
+    }
+
+    // Use default range
+    return defaultHeader;
 }
