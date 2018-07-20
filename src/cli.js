@@ -85,7 +85,7 @@ async function runProgram() {
     // Release flag used, but no name passed
     if (program.release === true) {
       if (typeof config.jira.generateReleaseVersionName !== 'function') {
-        console.log("You need to define the jira.generateReleaseVersionName function in your config, if you're not going to pass the release version name in the command.");
+        console.error("You need to define the jira.generateReleaseVersionName function in your config, if you're not going to pass the release version name in the command.");
         return;
       }
       program.release = await config.jira.generateReleaseVersionName();

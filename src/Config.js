@@ -42,9 +42,9 @@ export function readConfigFile(configPath) {
     localConf = require(configPath);
   } catch(e) {
     if (e instanceof SyntaxError) {
-      console.log('Error reading changelog.config.js:');
-      console.log(e.stack);
-      console.log(e.message);
+      console.error('Error reading changelog.config.js:');
+      console.error(e.stack);
+      console.error(e.message);
     }
   }
 

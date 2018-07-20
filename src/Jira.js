@@ -135,7 +135,7 @@ export default class Jira {
         this.getJiraIssue.bind(this, ticketKey)
       );
       promise.catch(() => {
-        console.log(`Ticket ${ticketKey} not found`);
+        console.error(`Ticket ${ticketKey} not found`);
       });
       this.ticketPromises[ticketKey] = promise;
     }
@@ -192,7 +192,7 @@ export default class Jira {
       ticket.fields.fixVersions.push({name: versionObj.name});
       return promiseThrottle.add(updateTicketVersion.bind(this, ticket))
         .catch((err) => {
-          console.log(`Could not assign ticket ${ticket.key} to release '${versionObj.name}':`, err.error.errors);
+          console.error(`Could not assign ticket ${ticket.key} to release '${versionObj.name}':`, err.error.errors);
         });
     });
     return Promise.all(promises);
