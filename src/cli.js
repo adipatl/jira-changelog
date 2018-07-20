@@ -105,10 +105,11 @@ async function runProgram() {
 
     data.report = {
       header: config.report.header,
-      from: config.sourceControl.from,
-      to: config.sourceControl.to,
+      from: range.from,
+      to: range.to,
+      before: range.before,
+      after: range.after
     };
-
 
     // Render and output template
     const entitles = new Entities.AllHtmlEntities();
