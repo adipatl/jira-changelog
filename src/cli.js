@@ -85,7 +85,7 @@ async function runProgram() {
     // Release flag used, but no name passed
     if (program.release === true) {
       if (typeof config.jira.generateReleaseVersionName !== 'function') {
-        console.log("You need to define the jira.generateReleaseVersionName function in your config, if you're not going to pass the release version name in the command.")
+        console.log("You need to define the jira.generateReleaseVersionName function in your config, if you're not going to pass the release version name in the command.");
         return;
       }
       program.release = await config.jira.generateReleaseVersionName();
@@ -93,8 +93,16 @@ async function runProgram() {
 
     // Get logs
     const range = getRangeObject(config);
-    const commitLogs = await source.getCommitLogs(gitPath, range);
-    const changelog = await jira.generate(commitLogs, program.release);
+
+    let commitLogs;
+    let changelog;
+    try {
+      commitLogs = await source.getCommitLogs(gitPath, range);
+      changelog = await jira.generate(commitLogs, program.release);
+    } catch (e) {
+      console.error(e.message);
+      return;
+    }
 
     // Template data template
     let data = await transformCommitLogs(config, changelog);
@@ -126,7 +134,7 @@ async function runProgram() {
     }
   } catch(e) {
     console.error('Error: ', e.stack);
-    console.log(e.message);
+    console.error(e.message);
   }
 }
 
@@ -158,7 +166,8 @@ async function postToSlack(config, data, changelogMessage) {
     console.log('Done');
 
   } catch(e) {
-    console.log('Error: ', e.stack);
+    console.error('Error: ', e.stack);
+    console.error(e.message);
   }
 }
 
